@@ -1,0 +1,71 @@
+# to execute, run $ docker-compose -f <your-docker-compose>.yml --env-file <your-product>.env up
+# e.g. $ docker-compose -f docker-compose.yml --env-file=hsucr.container.env up
+version: '3.7'
+networks:
+  federated-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET:-192.168.10.0/24}
+services:
+  webgateway:
+    image: ${WEBGATEWAY_IMAGE_PATH}:${WEBGATEWAY_IMAGE_VERSION}
+    init: true
+    hostname: ${HOSTNAME}
+    container_name: ${COMPOSE_PROJECT_NAME}-webgateway
+    ports:
+    - ${WEBGATEWAY_INSECURE_PORT:-880}:80
+    - ${WEBGATEWAY_SECURE_PORT:-8443}:443
+    restart: "no"
+    command:
+      --ssl
+    volumes:
+    - ./webgateway/CSP.ini:/opt/webgateway/bin/CSP.ini
+    - ./webgateway/CSP.conf:/etc/apache2/mods-available/CSP.conf
+    - ./webgateway/certificate/ssl-cert.key:/irissys/tls/webgateway/tls.key
+    - ./webgateway/certificate/ssl-cert.pem:/irissys/tls/webgateway/tls.crt
+    networks:
+      federated-network:
+        ipv4_address: ${WEBGATEWAY_NETWORK_IP_ADDRESS:-192.168.10.10}
+  instance:
+    image: ${HS_IMAGE_PATH}:${HS_IMAGE_VERSION}
+    init: true
+    hostname: ${HS_INSTANCE_UNIQUE_IDENTIFIER}
+    container_name: ${COMPOSE_PROJECT_NAME}-instance
+    ports:
+    - ${INSTANCE_SUPERSERVER_PORT:-1972}:1972
+    - ${INSTANCE_WEBSERVER_PORT:-52773}:52773
+    - ${ISC_AGENT_PORT:-2188}:2188
+    extra_hosts:
+    - ${HOSTNAME}:${HOSTNAME_IP}
+    restart: "no"
+    command:
+      --key ${ISC_CONFIG_DIRECTORY:-/config/iris/}iris.key
+      --instance ${INSTANCE_NAME}
+      -c "sudo chown -R 51773:51773 ${ISC_DATA_DIRECTORY:-/data/iris/} && sudo chown -R 51773:51773 ${ISC_HS_DATA_DIRECTORY:-/data/hs/}"
+    environment:
+      - ISC_DATA_DIRECTORY=${ISC_DATA_DIRECTORY:-/data/iris/}
+      - ISC_CPF_MERGE_FILE_NAME=${ISC_CPF_MERGE_FILE_NAME:-merge.cpf}
+      - ISC_HS_DATA_DIRECTORY=${ISC_HS_DATA_DIRECTORY:-/data/hs/}
+      - ISC_CONFIG_DIRECTORY=${ISC_CONFIG_DIRECTORY:-/config/iris/}
+      - ISC_CPF_MERGE_FILE=${ISC_CONFIG_DIRECTORY:-/config/iris/}${ISC_CPF_MERGE_FILE_NAME:-merge.cpf}
+      - ISC_HS_CONFIG_DIRECTORY=${ISC_HS_CONFIG_DIRECTORY:-/config/hs/}
+      - ISC_HS_CONFIG_BASE_FILENAME=${ISC_HS_CONFIG_BASE_FILENAME:-hs-base-config.json}
+      - ISC_HS_DATA_INGESTION_DIRECTORY=${ISC_HS_DATA_INGESTION_DIRECTORY:-/data-ingestion/Data/}
+    volumes:
+    - type: bind
+      source: ${EXTERNAL_IRIS_CONFIG_DIRECTORY:-../config/iris/}
+      target: ${ISC_CONFIG_DIRECTORY:-/config/iris/}
+    - type: bind
+      source: ${EXTERNAL_HS_CONFIG_DIRECTORY:-../config/hs/}
+      target: ${ISC_HS_CONFIG_DIRECTORY:-/config/hs/}
+    - type: bind
+      source: ${EXTERNAL_DATA_INGESTION_DIRECTORY:-../data-ingestion/Data/}
+      target: ${ISC_HS_DATA_INGESTION_DIRECTORY:-/data-ingestion/Data/}
+    - type: volume
+      target: ${ISC_DATA_DIRECTORY:-/data/iris/}
+    - type: volume
+      target: ${ISC_HS_DATA_DIRECTORY:-/data/hs/}
+    networks:
+      federated-network:
+        ipv4_address: ${INSTANCE_NETWORK_IP_ADDRESS:-192.168.10.11}
