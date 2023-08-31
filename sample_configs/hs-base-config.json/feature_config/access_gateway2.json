@@ -1,0 +1,7 @@
+{
+    "name": "HSACCESS2",
+    "type": "AccessGateway2",
+    "template": "HS.Sample.Production.AccessGateway2.SimpleProduction",
+    "hubEndpoint": "https://<hub host>:<hub port>/csp/healthshare/<hub name>/services/HS.Hub.HSWS.WebServices.cls",
+    "sslConfig": "<ssl config to connect to hub>"
+}

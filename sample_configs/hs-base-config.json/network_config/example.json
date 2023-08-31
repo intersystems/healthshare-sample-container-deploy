@@ -1,0 +1,7 @@
+{
+    "networkHostName": "<host name to access instance>",
+    "securePort": 443,
+    "secureIsActive": true,
+    "secureWebServerPrefix": "",
+    "tlsConfig": "<ssl/tls config used for communication with this instance>"
+}

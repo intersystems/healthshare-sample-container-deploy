@@ -1,15 +1,5 @@
 {
-    "network-config": {
-        "networkHostName": "<hostname>",
-        "securePort": 443,
-        "secureIsActive": true,
-        "tlsConfig": "<IRIS SSL/TLS Config Name>"
-    },
+    "network-config": {},
     "oauth-config": {},
-    "feature-config": {
-        "name": "<Namespace Name>",
-        "type": "<Namespace Type>",
-        "template": "<Namespace Production Template>"
-    }
-
+    "feature-config": {}
 }

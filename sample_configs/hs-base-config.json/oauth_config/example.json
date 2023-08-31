@@ -1,0 +1,16 @@
+{
+    "instanceOAuthEnabled": true,
+    "oAuthNetworkInfo": [
+        {
+            "hostName": "<FQDN used for browser access to instance>",
+            "port": "<port used for browser access to instance>",
+            "webServerPrefix": "<web server prefix used for browser access to instance>"
+        }
+    ],
+    "webAppOAuthEnabled": [
+        {
+            "webAppName": "/csp/sys",
+            "oAuthEnabled": false
+        }
+    ]
+}

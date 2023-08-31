@@ -1,0 +1,6 @@
+{
+    "name": "HSPD",
+    "type": "ProviderDirectory",
+    "hubEndpoint": "https://<hub host>:<hub port>/csp/healthshare/<hub name>/services/HS.Hub.HSWS.WebServices.cls",
+    "sslConfig": "<ssl config to connect to hub>"
+}
