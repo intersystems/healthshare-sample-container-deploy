@@ -12,7 +12,7 @@ services:
     image: ${WEBGATEWAY_IMAGE_PATH}:${WEBGATEWAY_IMAGE_VERSION}
     init: true
     hostname: ${HOSTNAME}
-    container_name: ${COMPOSE_PROJECT_NAME}-webgateway
+    container_name: ${COMPOSE_PROJECT_NAME}-web-gateway
     ports:
     - ${WEBGATEWAY_INSECURE_PORT:-880}:80
     - ${WEBGATEWAY_SECURE_PORT:-8443}:443
@@ -20,10 +20,10 @@ services:
     command:
       --ssl
     volumes:
-    - ./webgateway/CSP.ini:/opt/webgateway/bin/CSP.ini
-    - ./webgateway/CSP.conf:/etc/apache2/mods-available/CSP.conf
-    - ./webgateway/certificate/ssl-cert.key:/irissys/tls/webgateway/tls.key
-    - ./webgateway/certificate/ssl-cert.pem:/irissys/tls/webgateway/tls.crt
+    - ./web-gateway/CSP.ini:/opt/webgateway/bin/CSP.ini
+    - ./web-gateway/CSP.conf:/etc/apache2/mods-available/CSP.conf
+    - ./web-gateway/certificate/ssl-cert.key:/irissys/tls/webgateway/tls.key
+    - ./web-gateway/certificate/ssl-cert.pem:/irissys/tls/webgateway/tls.crt
     networks:
       federated-network:
         ipv4_address: ${WEBGATEWAY_NETWORK_IP_ADDRESS:-192.168.10.10}
@@ -54,13 +54,13 @@ services:
       - ISC_HS_DATA_INGESTION_DIRECTORY=${ISC_HS_DATA_INGESTION_DIRECTORY:-/data-ingestion/Data/}
     volumes:
     - type: bind
-      source: ${EXTERNAL_IRIS_CONFIG_DIRECTORY:-../config/iris/}
+      source: ${EXTERNAL_IRIS_CONFIG_DIRECTORY:-./config/iris/}
       target: ${ISC_CONFIG_DIRECTORY:-/config/iris/}
     - type: bind
-      source: ${EXTERNAL_HS_CONFIG_DIRECTORY:-../config/hs/}
+      source: ${EXTERNAL_HS_CONFIG_DIRECTORY:-./config/hs/}
       target: ${ISC_HS_CONFIG_DIRECTORY:-/config/hs/}
     - type: bind
-      source: ${EXTERNAL_DATA_INGESTION_DIRECTORY:-../data-ingestion/Data/}
+      source: ${EXTERNAL_DATA_INGESTION_DIRECTORY:-./data-ingestion/Data/}
       target: ${ISC_HS_DATA_INGESTION_DIRECTORY:-/data-ingestion/Data/}
     - type: volume
       target: ${ISC_DATA_DIRECTORY:-/data/iris/}
