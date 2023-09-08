@@ -1,13 +1,13 @@
 <!-- omit in toc -->
 # healthshare-sample-container-deploy
 
-This repository contains sample deployment files to deploy HealthShare (HS) applications as container stacks. Note that these are sample files intended to be used along with 
-the official HS user documentation (TODO: Add link).
+This repository contains sample deployment files to deploy HealthShare (HS) applications as container stacks. Note that these are sample files intended to be used along with the [HealthShare user documentation](https://docs.intersystems.com/hs202311/csp/docbook/DocBook.UI.Page.cls).
 
 **These sample files ARE NOT intended for direct usage in production environments.**
 
-A single HS application consists of a stack with two containers: a web gateway
-container and a HS instance container. Below we describe the sample files provided in this repository to deploy such HS applications.
+A single HealthShare application consists of a stack with two containers:
+a Web Gateway container and a HealthShare instance container.
+Below we describe the sample files provided in this repository to deploy such HealthShare applications.
 
 - [Structure](#structure)
 - [sample\_deploy](#sample_deploy)
