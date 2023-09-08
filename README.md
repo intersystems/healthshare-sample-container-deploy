@@ -23,9 +23,8 @@ Below we describe the sample files provided in this repository to deploy such He
 ## Structure
 
 This repository is structured into two top level directories: `sample_deploy` and `sample_configs`.
-- `sample_deploy` contains the directory structure recommended to deploy a HS container stack.
-While the directory structure can be altered, this would require overriding 
-variables in the environment (.env) files.
+- `sample_deploy` contains the directory structure recommended to deploy an HS container stack. 
+While the directory structure can be altered, this requires that you override variables in the environment (.env) files.
 - `sample_configs` contain example configuration files for configuring the different
 types of HS applications.
 
