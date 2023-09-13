@@ -1,6 +1,4 @@
 {
     "name": "HAE",
-    "type": "HealthcareActionEngine",
-    "auditProduction": false,
-    "defaultTimezone": "America/New_York"
+    "type": "HealthcareActionEngine"
 }
