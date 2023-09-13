@@ -1,7 +1,7 @@
 <!-- omit in toc -->
 # healthshare-sample-container-deploy
 
-This repository contains sample deployment files to deploy HealthShare (HS) applications as container stacks. Note that these are sample files intended to be used along with the [HealthShare user documentation](https://docs.intersystems.com/hs202311/csp/docbook/DocBook.UI.Page.cls).
+This repository contains sample deployment files to deploy InterSystems HealthShare (HS) applications as container stacks. Note that these are sample files intended to be used along with the [HealthShare user documentation](https://docs.intersystems.com/hs202311/csp/docbook/DocBook.UI.Page.cls).
 
 **These sample files ARE NOT intended for direct usage in production environments.**
 
@@ -53,20 +53,21 @@ This directory structure is as follows:
 
 Below we break down the roles of the various directories and files. For directories/
 files whose locations can be changed, the corresponding environment variables that 
-control the directory locations are also referenced. Note that ALL directory related 
-environment variables are optional and if not provided, will expect the default 
-directory structure referenced in the above image and detailed below.
+control the directory locations are also referenced. Note that the directory related 
+environment variables are optional. If you do not specify directory-related environment
+variable values, then you **must** use the default directory structure referenced in 
+the above image and detailed below.
 
 ### docker-compose and container.env
 
 To deploy the container stack, the following command is run:
 ```bash
-docker-compose -f docker-compose.yml --env-file=container.env up
+docker-compose --env-file=container.env up
 ```
 
-This command will configure a single HS application stack consisting of two containers: web gateway and HS instance.
+This command will configure a single HS application stack consisting of two containers: Web Gateway and HS instance.
 
-However, before this can be run, the values in `container.env` need to be populated. The file itself describes what each of the variables does and this is further fleshed out in the official HS user documentation. 
+However, before this can be run, the values in `container.env` need to be populated. The file itself describes what each of the variables does and this is further fleshed out in the HS user documentation. 
 In below sections, when environment variables are referenced, they will only be referenced
 by name and their description can be looked up in one of the above referenced sources.
 
@@ -75,7 +76,7 @@ You will notice that the variables themselves or their corresponding defaults in
 ### web-gateway
 
 This top level directory contains the files necessary to deploy an InterSystems 
-Web Gateway image which is documented in the official [IRIS Web Gateway documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GCGI).
+Web Gateway image which is documented in the [InterSystems IRIS Web Gateway documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GCGI).
 
 ### config
 
@@ -87,7 +88,7 @@ lifetime of a running container.
 
 This directory has two sub-directories:
 - `hs`: For HS-specific configuration files
-- `iris`: For IRIS-specific configuration files
+- `iris`: For InterSystems IRIS-specific configuration files
 
 #### hs
 
@@ -95,7 +96,7 @@ This directory MUST consist of a single JSON file named `hs-base-config.json` by
 (can be overridden using environment variable ISC_HS_CONFIG_BASE_FILENAME).
 This JSON file has the following keys in it:
 - (REQUIRED) network-config: basic network settings required to communicate with the HS instance.
-- (REQUIRED) feature-config: metadata used to configure a HS application namespace (registry, edge gateway etc.)
+- (REQUIRED) feature-config: metadata used to configure a HS application namespace (Registry, Edge Gateway etc.)
 - (OPTIONAL) oauth-config: metadata used to configure local OAuth related settings (whether OAuth is enabled, additional network info etc.)
 
 Each of those keys has values which are JSON objects detailed in the next sections.
@@ -106,7 +107,7 @@ Environment variables related to this directory:
 - `ISC_HS_CONFIG_BASE_FILENAME`
 
 **NOTE:** the `hs-base-config.json` file is not to be provided when deploying a 
-HS backup mirror member. This is detailed in the HS user documentation.
+HS backup mirror member. This is detailed in the [HS user documentation](https://docs.intersystems.com/hs202311/csp/docbook/DocBook.UI.Page.cls?KEY=HEMRR_ch_mirroring_existing_environment#HEMRR_mirroring_installing_second_failover_existing).
 
 #### iris
 

@@ -1,6 +1,7 @@
 {
     "name": "HSPC",
     "type": "PersonalCommunity",
+    "template": "HSPortal.Production.SampleProduction.PortalProduction",
     "hubEndpoint": "https://<hub host>:<hub port>/csp/healthshare/<hub name>/services/HS.Hub.HSWS.WebServices.cls",
     "sslConfig": "<ssl config to connect to hub>"
 }
