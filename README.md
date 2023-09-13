@@ -76,7 +76,11 @@ You will notice that the variables themselves or their corresponding defaults in
 ### web-gateway
 
 This top level directory contains the files necessary to deploy an InterSystems 
-Web Gateway image which is documented in the [InterSystems IRIS Web Gateway documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GCGI).
+Web Gateway image which is documented in the [InterSystems Web Gateway documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GCGI).
+
+If you are already familiar with the InterSystems Web Gateway, here is a 
+[sample docker-compose file](https://github.com/intersystems-community/webgateway-examples/tree/master/demo-compose) 
+for deploying an InterSystems Web Gateway.
 
 ### config
 
