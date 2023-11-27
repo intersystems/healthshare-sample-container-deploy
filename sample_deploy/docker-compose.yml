@@ -14,7 +14,6 @@ services:
     hostname: ${HOSTNAME}
     container_name: ${COMPOSE_PROJECT_NAME}-web-gateway
     ports:
-      - ${WEBGATEWAY_INSECURE_PORT:-880}:80
       - ${WEBGATEWAY_SECURE_PORT:-443}:443
     restart: "no"
     command: --ssl
@@ -33,7 +32,6 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}-instance
     ports:
       - ${INSTANCE_SUPERSERVER_PORT:-1972}:1972
-      - ${INSTANCE_WEBSERVER_PORT:-52773}:52773
       - ${ISC_AGENT_PORT:-2188}:2188
     extra_hosts:
       - ${HOSTNAME}:${HOSTNAME_IP}
