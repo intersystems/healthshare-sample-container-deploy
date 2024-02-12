@@ -59,9 +59,14 @@ services:
         source: ${EXTERNAL_DATA_INGESTION_DIRECTORY:-./data-ingestion/Data/}
         target: ${ISC_HS_DATA_INGESTION_DIRECTORY:-/data-ingestion/Data/}
       - type: volume
+        source: iris-data
         target: ${ISC_DATA_DIRECTORY:-/data/iris/}
       - type: volume
+        source: hs-data
         target: ${ISC_HS_DATA_DIRECTORY:-/data/hs/}
     networks:
       federated-network:
         ipv4_address: ${INSTANCE_NETWORK_IP_ADDRESS:-192.168.10.11}
+volumes:
+  iris-data:
+  hs-data:
