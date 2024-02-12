@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Web-gateway now uses "latest-cd" version
+- Volumes at /data/hs/ and /data/iris/ are now named "hs-data" and "iris-data". New volumes will NOT be created during image swap.
 
 ### Fixed
 -
