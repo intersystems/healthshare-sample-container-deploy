@@ -1,0 +1,4 @@
+set list = ##class(%ZHSLIB.HealthShareMgr).GetDatabaseList()
+set ptr = 0
+while $ListNext(list, ptr, db) { do ##class(%ZHSLIB.HealthShareMgr).UpdateReadWrite(db, 0) }
+halt

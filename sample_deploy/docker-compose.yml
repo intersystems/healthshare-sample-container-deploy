@@ -1,5 +1,4 @@
-# to execute, run $ docker-compose -f <your-docker-compose>.yml --env-file <your-product>.env up
-# e.g. $ docker-compose -f docker-compose.yml --env-file=hsucr.container.env up
+# to execute, run docker compose -f docker-compose.yml --env-file container.env up --build
 version: "3.7"
 networks:
   federated-network:
@@ -26,8 +25,14 @@ services:
       federated-network:
         ipv4_address: ${WEBGATEWAY_NETWORK_IP_ADDRESS:-192.168.10.10}
   instance:
-    image: ${HS_IMAGE_PATH}:${HS_IMAGE_VERSION}
-    init: true
+    user: "51773:51773"
+    build:
+      context: .
+      args:
+        BASE: ${HS_IMAGE_PATH}:${HS_IMAGE_VERSION}
+        INSTANCE_NAME: ${INSTANCE_NAME}
+        IRIS_KEY_SRC_DIR: ${EXTERNAL_IRIS_CONFIG_DIRECTORY:-./config/iris}
+    init: false
     hostname: ${HS_INSTANCE_UNIQUE_IDENTIFIER}
     container_name: ${COMPOSE_PROJECT_NAME}-instance
     ports:
