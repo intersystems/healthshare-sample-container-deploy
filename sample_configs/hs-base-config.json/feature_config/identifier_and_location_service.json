@@ -1,6 +1,6 @@
 {
     "name": "HSILS",
-    "type": "Foundation",
+    "type": "IdentifierAndLocationService",
     "template": "HS.Sample.Production.ILS.SimpleProduction",
     "hubEndpoint": "https://<hub host>:<hub port>/csp/healthshare/<hub name>/services/HS.Hub.HSWS.WebServices.cls",
     "sslConfig": "<ssl config to connect to hub>"
